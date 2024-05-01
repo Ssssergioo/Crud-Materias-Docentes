@@ -16,7 +16,41 @@
 
 
 
-    y aca el de las materias
+    aca el de las materias
+    <!-- Aca abajo? -->
+    <div class="container mt-5">
+        <h2>CRUD de Materias</h2>
+        <form id="formMateria">
+            <div class="form-group">
+                <label for="mate_id"></label>
+                <input type="hidden" type="text" class="form-control" id="mate_id">
+            </div>
+            <div class="form-group">
+                <label for="carre_id"></label>
+                <input type="hidden" type="text" class="form-control" id="carre_id">
+            </div>
+            <div class="form-group">
+                <label for="doce_id"></label>
+                <input type="hidden" type="text" class="form-control" id="doce_id">
+            </div>
+            <!--no se si tiene que estar hidden aun, revisar..-->
+            <div class="form-group">
+                <label for="mate_name">Nombre de Materia:</label>
+                <input type="text" class="form-control" id="mate_name">
+            </div>
+            <div class="form-group">
+                <label for="mate_codi">Código de Materia:</label>
+                <input type="text" class="form-control" id="mate_codi">
+            </div>
+            <div class="form-group">
+                <label for="mate_anho">Año de la Materia:</label>
+                <input type="text" class="form-control" id="mate_anho">
+            </div>
+            <button type="submit" id="btnGuardar">Guardar</button>
+            <button type="button" id="btnCancelar">Cancelar</button>
+        </form>
+    </div>
+
     <script src="Docentes/app.js"></script>
     <script src="Docentes/Docente.js"></script>
     <script src="Docentes/Docentes.js"></script>
