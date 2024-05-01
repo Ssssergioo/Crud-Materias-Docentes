@@ -7,7 +7,48 @@
 </head>
 <body>
 
-    aca iria el crud de los docentes
+    <div class="container">
+        <h2>CRUD de Materias</h2>
+        <div id="docente">
+
+            <div class="form-group">
+                    <label></label>
+                    <input type="hidden" id="doce_id">
+            </div>
+
+            <div class="form-group">
+                <label></label>
+                <input type="text" id="doce_apellido" placeholder="Apellido" maxlength="100" required min="3">
+            </div>
+
+            <div class="form-group">
+            <label></label>
+            <input type="text" id="doce_nombre" placeholder="Nombre" maxlength="100" required min="3">
+            </div>
+
+            <div class="form-group">
+            <label></label>
+            <input type="text" id="doce_mail" placeholder="Correo" maxlength="100" required min="3">
+            </div>
+
+            <div class="form-group">
+            <label></label>
+            <input type="date" id="doce_cumple" placeholder="Fecha de Nacimiento">
+            </div>
+
+            <div class="form-group">
+            <label></label>
+            <input type="text" id="doce_cell" placeholder="Telefono" maxlength="25">
+            </div>
+
+            <div>
+                <button id="btnGuardarDocente">Guardar</button>
+                <button id="btnCancelarDocente">Cancelar</button>
+            </div>
+
+            <div id="tablaDocente"></div>
+        </div>
+    </div>
 
 
 
@@ -15,8 +56,6 @@
 
 
 
-
-    aca el de las materias
     <!-- Aca abajo? -->
     <div class="container mt-5">
         <h2>CRUD de Materias</h2>
