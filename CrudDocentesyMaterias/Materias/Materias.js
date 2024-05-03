@@ -1,3 +1,4 @@
+console.log("Materias");
 class Materias {
     datos = [];
     constructor() {

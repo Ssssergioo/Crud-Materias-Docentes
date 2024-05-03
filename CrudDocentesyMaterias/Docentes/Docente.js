@@ -1,4 +1,4 @@
-class Docente{
+class Docente {
     doce_id;
     doce_apellido;
     doce_nombre;
