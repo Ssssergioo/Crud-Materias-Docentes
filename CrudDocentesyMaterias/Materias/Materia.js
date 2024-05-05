@@ -1,5 +1,4 @@
 class Materia {
-
         mate_id;
         carre_id; 
         doce_id;

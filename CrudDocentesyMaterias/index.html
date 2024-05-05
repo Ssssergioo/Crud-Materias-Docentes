@@ -9,12 +9,12 @@
 <body>
 
     <div class="container">
-        <h2>CRUD de Materias</h2>
+        <h2>CRUD de Docentes?</h2>
         <div id="docente">
 
             <div class="form-group">
-                    <label></label>
-                    <input type="hidden" id="doce_id">
+                <label></label>
+                <input type="hidden" id="doce_id">
             </div>
             
             <div class="form-group">
@@ -23,23 +23,23 @@
             </div>
             
             <div class="form-group">
-            <label></label>
-            <input type="text" id="doce_nombre" placeholder="Nombre" maxlength="100" required min="3">
+                <label></label>
+                <input type="text" id="doce_nombre" placeholder="Nombre" maxlength="100" required min="3">
             </div>
         
             <div class="form-group">
-            <label></label>
-            <input type="text" id="doce_mail" placeholder="Correo" maxlength="100" required min="3">
+                <label></label>
+                <input type="text" id="doce_mail" placeholder="Correo" maxlength="100" required min="3">
             </div>
         
             <div class="form-group">
-            <label></label>
-            <input type="date" id="doce_cumple" placeholder="Fecha de Nacimiento">
+                <label></label>
+                <input type="date" id="doce_cumple" placeholder="Fecha de Nacimiento">
             </div>
 
             <div class="form-group">
-            <label></label>
-            <input type="text" id="doce_cell" placeholder="Telefono" maxlength="25">
+                <label></label>
+                <input type="text" id="doce_cell" placeholder="Telefono" maxlength="25">
             </div>
 
             <div>
@@ -51,44 +51,29 @@
         </div>
     </div>
 
-
-
-
-
-
-
-    <!-- Aca abajo? -->
-    <div class="container mt-5">
-        <h2>CRUD de Materias</h2>
+    <!-- form de la parte de materias -->
+    <div class="container">
+        <h2>CRUD de materias</h2>
         <form id="formMateria">
-            <div class="form-group">
-                <label for="mate_id"></label>
-                <input type="hidden" type="text" class="form-control" id="mate_id">
-            </div>
-            <div class="form-group">
-                <label for="carre_id"></label>
-                <input type="hidden" type="text" class="form-control" id="carre_id">
-            </div>
-            <div class="form-group">
-                <label for="doce_id"></label>
-                <input type="hidden" type="text" class="form-control" id="doce_id">
-            </div>
-            <!--no se si tiene que estar hidden aun, revisar..-->
-            <div class="form-group">
-                <label for="mate_name">Nombre de Materia:</label>
-                <input type="text" class="form-control" id="mate_name">
-            </div>
-            <div class="form-group">
-                <label for="mate_codi">Código de Materia:</label>
-                <input type="text" class="form-control" id="mate_codi">
-            </div>
-            <div class="form-group">
-                <label for="mate_anho">Año de la Materia:</label>
-                <input type="text" class="form-control" id="mate_anho">
-            </div>
-            <button type="submit" id="btnGuardar">Guardar</button>
-            <button type="button" id="btnCancelar">Cancelar</button>
+            <input type="hidden" id="mate_id">
+            <label for="carre_id">Carrera:</label>
+            <select id="carre_id">
+                <!-- cargar el select del local -->
+            </select><br>
+            <label for="doce_id">Docente:</label>
+            <select id="doce_id">
+                <!--cargar el select del local -->
+            </select><br>
+            <label for="mate_name">Nombre:</label>
+            <input type="text" id="mate_name" required><br>
+            <label for="mate_codi">Código:</label>
+            <input type="text" id="mate_codi" required><br>
+            <label for="mate_anho">Año:</label>
+            <input type="date" id="mate_anho" required><br>
+            <button id="btnGuardarMateria">Guardar</button>
+            <button id="btnCancelarMateria">Cancelar</button>
         </form>
+        <div id="tablaMateria"></div>
     </div>
 
     <script src="Docentes/app.js"></script>
