@@ -1,88 +1,87 @@
 // Crear una instancia del gestor de docentes
-class Docente {
-    doce_id;
-    doce_apellido;
-    doce_nombre;
-    doce_mail;
-    doce_cumple;
-    doce_cell;
-}
+// class Docente {
+//     doce_id;
+//     doce_apellido;
+//     doce_nombre;
+//     doce_mail;
+//     doce_cumple;
+//     doce_cell;
+// }
 
-class Docentes {
-    datos = [];
+// class Docentes {
+//     datos = [];
     
-    constructor() {
-        let data = localStorage.getItem("docentes");
-        if (!data) {
-            this.predata();
-        } else {
-            this.getdata();
-        }
-        this.persistir();
-    }
+//     constructor() {
+//         let data = localStorage.getItem("docentes");
+//         if (!data) {
+//             this.predata();
+//         } else {
+//             this.getdata();
+//         }
+//         this.persistir();
+//     }
 
-    getMaxId() {
-        let idMax = -1;
-        this.datos.forEach((docente) => {
-            if (docente.doce_id > idMax) {
-                idMax = docente.doce_id;
-            }
-        });
-        return idMax;
-    }
+//     getMaxId() {
+//         let idMax = -1;
+//         this.datos.forEach((docente) => {
+//             if (docente.doce_id > idMax) {
+//                 idMax = docente.doce_id;
+//             }
+//         });
+//         return idMax;
+//     }
 
-    predata() {
-        // Cargar datos de prueba
+//     predata() {
+//         // Cargar datos de prueba
 
-        this.datos.push({ doce_id: 1, doce_apellido: 'Pérez', doce_nombre: 'María', doce_mail: 'perez@gmail.com', doce_cumple: '1980-05-15', doce_cell: '124' });
-        this.datos.push({ doce_id: 2, doce_apellido: 'González', doce_nombre: 'Juan', doce_mail: 'gonzalez@gmail.com', doce_cumple: '1975-10-20', doce_cell: '463456' });
-    }
-    //para obtener lo de la memoria local
-    getdata() {
-        this.datos = JSON.parse(localStorage.getItem("docentes"));
-    }
-    //persitir en la memoria local
-    persistir() {
-        localStorage.setItem("docentes", JSON.stringify(this.datos));
-    }
-    //obtener el indec por el id
-    getIndexById(id) {
-        for (let i = 0; i < this.datos.length; i++) {
-            if (this.datos[i].doce_id === id) {
-                return i;
-            }
-        }
-        return -1;
-    }
-    //agregar al docente
-    agregar(docente) {
-        docente.doce_id = this.getMaxId() + 1;
-        this.datos.push(docente);
-        this.persistir();
-    }
-    // actualizar la lista
-    actualizar(docente) {
-        const index = this.getIndexById(docente.doce_id);
-        if (index !== -1) {
-            this.datos[index] = docente;
-            this.persistir();
-        }
-    }
-    //borrar por id
-    borrar(id) {
-        const index = this.getIndexById(id);
-        if (index !== -1) {
-            this.datos.splice(index, 1);
-            this.persistir();
-        }
-    }
+//         this.datos.push({ doce_id: 1, doce_apellido: 'Pérez', doce_nombre: 'María', doce_mail: 'perez@gmail.com', doce_cumple: '1980-05-15', doce_cell: '124' });
+//         this.datos.push({ doce_id: 2, doce_apellido: 'González', doce_nombre: 'Juan', doce_mail: 'gonzalez@gmail.com', doce_cumple: '1975-10-20', doce_cell: '463456' });
+//     }
+//     //para obtener lo de la memoria local
+//     getdata() {
+//         this.datos = JSON.parse(localStorage.getItem("docentes"));
+//     }
+//     //persitir en la memoria local
+//     persistir() {
+//         localStorage.setItem("docentes", JSON.stringify(this.datos));
+//     }
+//     //obtener el indec por el id
+//     getIndexById(id) {
+//         for (let i = 0; i < this.datos.length; i++) {
+//             if (this.datos[i].doce_id === id) {
+//                 return i;
+//             }
+//         }
+//         return -1;
+//     }
+//     //agregar al docente
+//     agregar(docente) {
+//         docente.doce_id = this.getMaxId() + 1;
+//         this.datos.push(docente);
+//         this.persistir();
+//     }
+//     // actualizar la lista
+//     actualizar(docente) {
+//         const index = this.getIndexById(docente.doce_id);
+//         if (index !== -1) {
+//             this.datos[index] = docente;
+//             this.persistir();
+//         }
+//     }
+//     //borrar por id
+//     borrar(id) {
+//         const index = this.getIndexById(id);
+//         if (index !== -1) {
+//             this.datos.splice(index, 1);
+//             this.persistir();
+//         }
+//     }
 
-    obtenerTodos() {
-        return this.datos;
-    }
-}
+//     obtenerTodos() {
+//         return this.datos;
+//     }
+// }
 
-console.log("app docente");
 var docentes = new Docentes();
 
 // Función para limpiar el formulario
@@ -116,8 +115,10 @@ function borrarForm(e) {
 }
 
 // Función para guardar o actualizar un docente
-var docente = new Docente;
+
 function guardarForm() {
+    var docente = new Docente();
+
     docente.doce_id = parseInt(document.getElementById("doce_id").value);
     docente.doce_apellido = document.getElementById("doce_apellido").value;
     docente.doce_nombre = document.getElementById("doce_nombre").value;
@@ -179,6 +180,9 @@ document.addEventListener("DOMContentLoaded", cargar);
 
 // Asignar evento al botón de guardar
 document.getElementById("btnGuardarDocente").addEventListener("click", guardarForm);
+document.getElementById("btnGuardarDocente").addEventListener("click", nuevoForm);
 
 // Asignar evento al botón de cancelar
 document.getElementById("btnCancelarDocente").addEventListener("click", cancelarForm);
+
+

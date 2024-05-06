@@ -3,7 +3,7 @@ class Materia {
     constructor() {
         this.mate_id = -1;
         this.carre_id = "";
-        this.doce_id = "";
+        this.doce_id = ""; // Este campo no está en el constructor original, verifica si debería estar aquí
         this.mate_name = "";
         this.mate_codi = "";
         this.mate_anho = "";
@@ -12,7 +12,7 @@ class Materia {
 
 // Clase para manejar las materias
 class Materias {
-    datos = [];
+    datosMateria = [];
     
     constructor() {
         let data = localStorage.getItem("materias");
@@ -21,12 +21,12 @@ class Materias {
         } else {
             this.getdata();
         }
-        this.persistir();
+        // No necesitas persistir aquí
     }
 
     getMaxId() {
         let idMax = -1;
-        this.datos.forEach((materia) => {
+        this.datosMateria.forEach((materia) => {
             if (materia.mate_id > idMax) {
                 idMax = materia.mate_id;
             }
@@ -35,22 +35,23 @@ class Materias {
     }
 
     predata() {
-        // Cargar datos de prueba
-        this.datos.push({ mate_id: 1, carre_id: '1', doce_id: '1', mate_name: 'Matemáticas', mate_codi: 'MAT-101', mate_anho: 2022 });
-        this.datos.push({ mate_id: 2, carre_id: '2', doce_id: '2', mate_name: 'Historia', mate_codi: 'HIS-201', mate_anho: 2022 });
-    }
-
-    getdata() {
-        this.datos = JSON.parse(localStorage.getItem("materias"));
+        // Cargar datosMateria de prueba
+        this.datosMateria.push({ mate_id: 1, carre_id: '1', doce_id: '1', mate_name: 'Matemáticas', mate_codi: 'MAT-101', mate_anho: 2022 });
+        this.datosMateria.push({ mate_id: 2, carre_id: '2', doce_id: '2', mate_name: 'Historia', mate_codi: 'HIS-201', mate_anho: 2022 });
+        this.persistir();
     }
 
     persistir() {
-        localStorage.setItem("materias", JSON.stringify(this.datos));
+        localStorage.setItem("materias", JSON.stringify(this.datosMateria));
+    }
+
+    getdata() {
+        this.datosMateria = JSON.parse(localStorage.getItem("materias"));
     }
 
     getIndexById(id) {
-        for (let i = 0; i < this.datos.length; i++) {
-            if (this.datos[i].mate_id === id) {
+        for (let i = 0; i < this.datosMateria.length; i++) {
+            if (this.datosMateria[i].mate_id === id) {
                 return i;
             }
         }
@@ -59,47 +60,48 @@ class Materias {
 
     agregar(materia) {
         materia.mate_id = this.getMaxId() + 1;
-        this.datos.push(materia);
-        this.persistir();
+        this.datosMateria.push(materia);
+        this.persistir(); // Persistir después de agregar
     }
 
     actualizar(materia) {
         const index = this.getIndexById(materia.mate_id);
         if (index !== -1) {
-            this.datos[index] = materia;
-            this.persistir();
+            this.datosMateria[index] = materia;
+            this.persistir(); // Persistir después de actualizar
         }
     }
 
     borrar(id) {
         const index = this.getIndexById(id);
         if (index !== -1) {
-            this.datos.splice(index, 1);
-            this.persistir();
+            this.datosMateria.splice(index, 1);
+            this.persistir(); // Persistir después de borrar
         }
     }
 
     obtenerTodos() {
-        return this.datos;
+        return this.datosMateria;
     }
 }
 
-console.log("app materia");
-
 var materias = new Materias();
 
-// funcion para limpiar el formulario de materias
+// función para limpiar el formulario de materias
 function nuevoFormMateria() {
+    document.getElementById("mate_id").value = -1; // También puedes establecer el valor del ID en -1 aquí
+    document.getElementById("carre_id").value = "";
+    document.getElementById("doce_id").value = ""; // Asegúrate de que esto es lo que quieres hacer
     document.getElementById("mate_name").value = "";
     document.getElementById("mate_codi").value = "";
     document.getElementById("mate_anho").value = "";
 }
 
-// funcion para cargar los datos de una materia en el formulario para editar
+// función para cargar los datosMateria de una materia en el formulario para editar
 function editarFormMateria(e) {
     let eid = e.target.getAttribute("data-id");
     let idx = materias.getIndexById(parseInt(eid));
-    let materia = materias.datos[idx];
+    let materia = materias.datosMateria[idx];
     document.getElementById("mate_id").value = materia.mate_id;
     document.getElementById("carre_id").value = materia.carre_id;
     document.getElementById("doce_id").value = materia.doce_id;
@@ -108,21 +110,21 @@ function editarFormMateria(e) {
     document.getElementById("mate_anho").value = materia.mate_anho;
 }
 
-// funcion para borrar una materia
+// función para borrar una materia
 function borrarFormMateria(e) {
     let eid = e.target.getAttribute("data-id");
     materias.borrar(parseInt(eid));
     dibujarTablaMateria();
 }
 
-// funcion para guardar o actualizar una materia
-//al guardar explota aca ;c
+
+// función para guardar o actualizar una materia
 function guardarFormMateria() {
     var materia = new Materia();
 
     materia.mate_id = parseInt(document.getElementById("mate_id").value);
     materia.carre_id = document.getElementById("carre_id").value;
-    materia.doce_id = document.getElementById("doce_id").value;
+    materia.doce_id = document.getElementById("doce_id").value; // Este de donde sale Misaaaa
     materia.mate_name = document.getElementById("mate_name").value;
     materia.mate_codi = document.getElementById("mate_codi").value;
     materia.mate_anho = document.getElementById("mate_anho").value;
@@ -134,14 +136,15 @@ function guardarFormMateria() {
     }
 
     dibujarTablaMateria();
+    nuevoFormMateria();
 }
 
-// funcion para cancelar la operación de materias
+// función para cancelar la operación de materias
 function cancelarFormMateria() {
     nuevoFormMateria();
 }
 
-// funcion para dibujar la tabla de materias
+// función para dibujar la tabla de materias
 function dibujarTablaMateria() {
     let tabla = "<table class='table'><thead><tr><th>Nombre</th><th>Código</th><th>Año</th><th>Docente</th><th>Carrera</th><th colspan='2'><button id='btnuevoMATE' class='btn btn-primary'>Nuevo</button></th></tr></thead><tbody>";
 
@@ -156,7 +159,7 @@ function dibujarTablaMateria() {
     asignarEventosMateria();
 }
 
-// funcion para asignar eventos a los botones de materias
+// función para asignar eventos a los botones de materias
 function asignarEventosMateria() {
     document.getElementById("btnuevoMATE").addEventListener("click", nuevoFormMateria);
     
@@ -171,7 +174,7 @@ function asignarEventosMateria() {
     }
 }
 
-// funcion para cargar la tabla de materias al cargar la página
+// función para cargar la tabla de materias al cargar la página
 function cargarMateria() {
     dibujarTablaMateria();
 }
@@ -181,3 +184,5 @@ document.addEventListener("DOMContentLoaded", cargarMateria);
 document.getElementById("btnGuardarMateria").addEventListener("click", guardarFormMateria);
 
 document.getElementById("btnCancelarMateria").addEventListener("click", cancelarFormMateria);
+
+
