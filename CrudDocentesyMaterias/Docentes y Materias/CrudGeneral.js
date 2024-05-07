@@ -171,11 +171,13 @@ function nuevoFormMateria() {
     document.getElementById("mate_id").value = -1; 
     document.getElementById("carre_id").value = "";
     document.getElementById("doce_id").value = ""; 
+    dibSelectMateriaId(-1);
     document.getElementById("mate_name").value = "";
     document.getElementById("mate_codi").value = "";
     document.getElementById("mate_anho").value = "";
 }
-// función para cargar los datosMateria de una materia en el formulario para editar
+// función para cargar los datos Materia de una materia en el formulario para editar
+
 function editarFormMateria(e) {
     let eid = e.target.getAttribute("data-id");
     let idx = materias.getIndexById(parseInt(eid));
@@ -186,6 +188,24 @@ function editarFormMateria(e) {
     document.getElementById("mate_name").value = materia.mate_name;
     document.getElementById("mate_codi").value = materia.mate_codi;
     document.getElementById("mate_anho").value = materia.mate_anho;
+    dibSelectFacuId(docentes.datos[idx].doce_apellido);
+}
+
+// selector de materias
+function dibSelectMateriaId(valor) {
+    let selected = " selected='selected'";
+    let opciones = "";
+    docentes.datos.forEach((d) => {
+        if (valor == d.doce_apellido) { selected = " selected='selected' "; } else { selected = '' }
+        opciones +=
+            "<option value='" +
+            d.doce_id + // Usar doce_id como valor para ese
+            "'" + selected + " >" +
+            d.doce_nombre +
+            "</option>";
+    });
+    console.log(opciones);
+    document.getElementById("docente_id").innerHTML = opciones;
 }
 // función para borrar una materia
 function borrarFormMateria(e) {
@@ -255,6 +275,10 @@ document.addEventListener("DOMContentLoaded", cargarMateria);
 document.getElementById("btnGuardarMateria").addEventListener("click", guardarFormMateria);
 
 document.getElementById("btnCancelarMateria").addEventListener("click", cancelarFormMateria);
+document.addEventListener("DOMContentLoaded", function() {
+    dibSelectMateriaId();
+});
+
 //hasta aca llega materias.
 
 //parte de docentes
