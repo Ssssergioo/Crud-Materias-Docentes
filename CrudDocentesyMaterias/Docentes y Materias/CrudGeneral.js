@@ -114,8 +114,8 @@ class Docentes {
 
     predata() {
         // Cargar datos de prueba
-        this.datos.push({ doce_id: 1, doce_apellido: 'Pérez', doce_nombre: 'María', doce_mail: 'perez@gmail.com', doce_cumple: '1980-05-15', doce_cell: '124' });
-        this.datos.push({ doce_id: 2, doce_apellido: 'González', doce_nombre: 'Juan', doce_mail: 'gonzalez@gmail.com', doce_cumple: '1975-10-20', doce_cell: '463456' });
+        this.datos.push({ doce_id: 1, doce_apellido: 'Medina', doce_nombre: 'Pablo', doce_mail: 'PabloMedina@gmail.com', doce_cumple: '1980-05-15', doce_cell: '124' });
+        this.datos.push({ doce_id: 2, doce_apellido: 'Escobar', doce_nombre: 'Rafael', doce_mail: 'RafaelEscobar@gmail.com', doce_cumple: '1975-10-20', doce_cell: '463456' });
         this.persistir();
     }
 
@@ -157,7 +157,9 @@ class Docentes {
             this.persistir();
         }
     }
-
+    obtenerDocentePorId(id) {
+        return this.datos.find(docente => docente.doce_id === id);
+    }
     obtenerTodos() {
         return this.datos;
     }
@@ -165,7 +167,7 @@ class Docentes {
 
 var materias = new Materias();
 var docentes = new Docentes();
-
+//Funciones del CRUD de MATERIAS
 // función para limpiar el formulario de materias
 function nuevoFormMateria() {
     document.getElementById("mate_id").value = -1; 
@@ -184,7 +186,7 @@ function editarFormMateria(e) {
     let materia = materias.datosMateria[idx];
     document.getElementById("mate_id").value = materia.mate_id;
     document.getElementById("carre_id").value = materia.carre_id;
-    document.getElementById("doce_id").value = materia.doce_id;
+    document.getElementById("doce_id").value = docente.doce_apellido;
     document.getElementById("mate_name").value = materia.mate_name;
     document.getElementById("mate_codi").value = materia.mate_codi;
     document.getElementById("mate_anho").value = materia.mate_anho;
@@ -201,7 +203,7 @@ function dibSelectMateriaId(valor) {
             "<option value='" +
             d.doce_id + // Usar doce_id como valor para ese
             "'" + selected + " >" +
-            d.doce_nombre +
+            d.doce_apellido +
             "</option>";
     });
     console.log(opciones);
@@ -239,10 +241,18 @@ function cancelarFormMateria() {
 }
 // función para dibujar la tabla de materias
 function dibujarTablaMateria() {
-    let tabla = "<table class='table'><thead><tr><th>Nombre</th><th>Código</th><th>Año</th><th>Docente</th><th>Carrera</th><th colspan='2'><button id='btnuevoMaTE' class='btn btn-primary'>Nuevo</button></th></tr></thead><tbody>";
-
+    let tabla = "<table class='table'><thead><tr><th>Nombre</th><th>Código</th><th>Año</th><th>Docente</th><th>Carrera</th><th>Año</th><th colspan='2'><button id='btnuevoMaTE' class='btn btn-primary'>Nuevo</button></th></tr></thead><tbody>";
     materias.obtenerTodos().forEach((materia) => {
-        tabla += "<tr><td>" + materia.mate_name + "</td><td>" + materia.mate_codi + "</td><td>" + materia.mate_anho + "</td><td>" + materia.doce_id + "</td><td>" + materia.carre_id + "</td><td><button class='bteditarMaTE btn btn-warning' data-id='" + materia.mate_id + "'>Editar</button></td><td><button class='btborrarMaTE btn btn-danger' data-id='" + materia.mate_id + "'>Borrar</button></td></tr>";
+        let docenteEncontrado = false; // Variable para rastrear si se encontró el docente
+        // Itera sobre todos los docentes para buscar el docente correspondiente a la materia
+        //estas medidas son para que se pueda acceder al apellido del docente
+        docentes.obtenerTodos().forEach((docente) => {
+            if (!docenteEncontrado) {
+                tabla += "<tr><td>" + materia.mate_name + "</td><td>" + materia.mate_codi + "</td><td>" + materia.mate_anho + "</td><td>" + docente.doce_apellido + "</td><td>" + materia.carre_id + "</td><td>" + materia.mate_anho + "</td><td><button class='bteditarMaTE btn btn-warning' data-id='" + materia.mate_id + "'>Editar</button></td><td><button class='btborrarMaTE btn btn-danger' data-id='" + materia.mate_id + "'>Borrar</button></td></tr>";
+                docenteEncontrado = true; // Marca que se ha encontrado el docente
+                return; // Sal del bucle de docentes
+            }
+        });
     });
 
     tabla += "</tbody></table>";
@@ -328,6 +338,7 @@ function guardarForm() {
     }
 
     dibujarTabla();
+    dibSelectMateriaId();
 }
 // Función para cancelar la operación
 function cancelarForm() {
@@ -338,6 +349,7 @@ function dibujarTabla() {
     let tabla = "<table class='table'><thead><tr><th scope='col'>Apellido</th><th scope='col'>Nombre</th><th scope='col'>Correo</th><th scope='col'>Fecha de Nacimiento</th><th scope='col'>Teléfono</th><th colspan='2'><button id='btnuevo' class='btn btn-primary'>Nuevo</button></th></tr></thead><tbody>";
 
     docentes.obtenerTodos().forEach((docente) => {
+        
         tabla += "<tr><td>" + docente.doce_apellido + "</td><td>" + docente.doce_nombre + "</td><td>" + docente.doce_mail + "</td><td>" + docente.doce_cumple + "</td><td>" + docente.doce_cell + "</td><td><button class='bteditar btn btn-warning' data-id='" + docente.doce_id + "'>Editar</button></td><td><button class='btborrar btn btn-danger' data-id='" + docente.doce_id + "'>Borrar</button></td></tr>";
     });
 
